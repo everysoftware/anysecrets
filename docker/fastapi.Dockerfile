@@ -31,7 +31,7 @@ ENV PATH="$POETRY_HOME/bin:$PATH"
 WORKDIR $APP_PATH
 COPY ./poetry.lock ./pyproject.toml ./
 
-RUN poetry install --no-dev
+RUN poetry install --only main
 RUN poetry export --without-hashes --without dev -f requirements.txt -o requirements.txt
 
 #
@@ -80,4 +80,4 @@ COPY ./alembic.ini ./
 COPY ./docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["gunicorn -w 4 -k uvicorn.workers.UvicornWorker \"$APP_DIR:app\" -b 0.0.0.0:8000"]
+CMD ["gunicorn -w 1 -k uvicorn.workers.UvicornWorker \"$APP_DIR:app\" -b 0.0.0.0:8000"]

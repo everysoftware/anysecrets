@@ -7,7 +7,7 @@ services:
       - pg_data:/var/lib/postgresql/data
     restart: unless-stopped
     ports:
-      - "5432:5432"
+      - "5414:5432"
 
   fastapi:
     build:
@@ -18,7 +18,7 @@ services:
       - .env
     restart: unless-stopped
     ports:
-      - "8001:8000"
+      - "8014:8000"
     depends_on:
       - db
     volumes:

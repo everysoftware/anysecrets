@@ -1,44 +1,41 @@
-# Secrets API
+# Secrets Backend
 
 ![GitHub](https://img.shields.io/github/license/everysoftware/secrets)
 
-Разворачиваемый менеджер паролей с AES шифрованием.
+Simple self-hosted password manager.
 
 ---
 
-**Backend:** https://github.com/everysoftware/secrets
+**Backend:** https://github.com/everysoftware/secrets-backend
 
 **Frontend:** https://github.com/everysoftware/secrets-frontend
 
 ---
 
-## Фичи
+## Features
 
-* **Безопасная авторизация** с использованием JWT-токенов.
-* **Шифрование паролей**. Применяется алгоритм симметричного шифрования AES. Данные
-  шифруются с помощью заданного секретного ключа.
+* **Secure authentication**. JWT-based authentication with access tokens.
+* **Password encryption**. Passwords are encrypted with AES-256.
 
-## Стек технологий
+## Stack
 
 Python 3.12 • FastAPI • SQLAlchemy • cryptography
 
-## Сборка
+## Installation
 
-1. Клонируйте репозиторий:
+1. Clone the repository:
 
     ```bash
-    git clone https://github.com/everysoftware/secrets
+    git clone https://github.com/everysoftware/secrets-backend
     ```
-2. Создайте `.env` файл - используйте `.env.example` как референс.
+2. Create `.env` based on `.env.example`.
 
-3. Запустите приложение:
+3. Start the application:
 
     ```bash
        make up
     ```
 
-## Скриншоты
+## API Reference
 
 ![img.png](assets/api_reference.png)
-
-**Made with ❤️ by Ivan Stasevich**
