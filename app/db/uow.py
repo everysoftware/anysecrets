@@ -1,61 +1,70 @@
 from __future__ import annotations
 
-from typing import Any, cast, Self
+import abc
+from abc import ABC
+from typing import Any, Self, cast
 
 from sqlalchemy.ext.asyncio import (
     AsyncSession,
     async_sessionmaker,
-    AsyncSessionTransaction,
 )
 
-from app.auth.repositories import UserRepository
 from app.passwords.repositories import PasswordRepository
 
 
-class UOW:
-    session_factory: async_sessionmaker[AsyncSession]
-    session: AsyncSession
-    transaction: AsyncSessionTransaction
-
-    users: UserRepository
+class IUnitOfWork(ABC):
     passwords: PasswordRepository
 
-    def __init__(self, session_factory: async_sessionmaker[AsyncSession]):
-        self.session_factory = session_factory
+    @abc.abstractmethod
+    async def begin(self) -> None: ...
 
     @property
-    def is_active(self) -> bool:
-        if not self.session:
-            return False
-        return cast(bool, self.session.is_active)
+    @abc.abstractmethod
+    def is_active(self) -> bool: ...
 
-    async def on_after_begin(self) -> None:
-        self.users = UserRepository(self.session)
-        self.passwords = PasswordRepository(self.session)
+    @abc.abstractmethod
+    async def commit(self) -> None: ...
 
-    async def begin(self) -> None:
-        self.session = self.session_factory()
-        await self.session.__aenter__()
-        self.transaction = self.session.begin()
-        await self.transaction.__aenter__()
-        await self.on_after_begin()
+    @abc.abstractmethod
+    async def rollback(self) -> None: ...
 
-    async def close(self, type_: Any, value: Any, traceback: Any) -> None:
-        await self.transaction.__aexit__(type_, value, traceback)
-        await self.session.__aexit__(type_, value, traceback)
-
-    async def flush(self) -> None:
-        await self.session.flush()
-
-    async def rollback(self) -> None:
-        await self.session.rollback()
-
-    async def commit(self) -> None:
-        await self.session.commit()
+    @abc.abstractmethod
+    async def close(self) -> None: ...
 
     async def __aenter__(self) -> Self:
         await self.begin()
         return self
 
-    async def __aexit__(self, type_: Any, value: Any, traceback: Any) -> None:
-        await self.close(type_, value, traceback)
+    async def __aexit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> None:
+        if exc_type is not None:
+            await self.rollback()
+        else:
+            await self.commit()
+        await self.close()
+
+
+class SQLAlchemyUOW(IUnitOfWork):
+    _session_factory: async_sessionmaker[AsyncSession]
+    _session: AsyncSession
+
+    def __init__(self, session_factory: async_sessionmaker[AsyncSession]) -> None:
+        self._session_factory = session_factory
+
+    async def begin(self) -> None:
+        self._session = self._session_factory()
+        self.passwords = PasswordRepository(self._session)
+
+    @property
+    def is_active(self) -> bool:
+        if not self._session:
+            return False
+        return cast(bool, self._session.is_active)
+
+    async def commit(self) -> None:
+        await self._session.commit()
+
+    async def rollback(self) -> None:
+        await self._session.rollback()
+
+    async def close(self) -> None:
+        await self._session.close()

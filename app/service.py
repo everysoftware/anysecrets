@@ -1,11 +1,11 @@
 from abc import ABC
 
 from app.db.dependencies import UOWDep
-from app.db.uow import UOW
+from app.db.uow import SQLAlchemyUOW
 
 
 class Service(ABC):
-    uow: UOW
+    uow: SQLAlchemyUOW
 
-    def __init__(self, uow: UOWDep):
+    def __init__(self, uow: UOWDep) -> None:
         self.uow = uow

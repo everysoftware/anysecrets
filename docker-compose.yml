@@ -8,6 +8,8 @@ services:
     restart: unless-stopped
     ports:
       - "5414:5432"
+    networks:
+        - secrets_net
 
   fastapi:
     build:
@@ -23,6 +25,10 @@ services:
       - db
     volumes:
       - "./app:/opt/app/app"
-
+    networks:
+      - secrets_net
 volumes:
   pg_data:
+networks:
+  secrets_net:
+    name: secrets_net

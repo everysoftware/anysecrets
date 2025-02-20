@@ -20,9 +20,7 @@ def encrypt_aes(data: str, key: str) -> str:
     key_bytes = base64.b64decode(key)
     iv = os.urandom(IV_SIZE)
 
-    cipher = Cipher(
-        algorithms.AES(key_bytes), modes.CBC(iv), backend=default_backend()
-    )
+    cipher = Cipher(algorithms.AES(key_bytes), modes.CBC(iv), backend=default_backend())
     encryptor = cipher.encryptor()
 
     context = padding.PKCS7(CONTEXT_BLOCK_SIZE).padder()
@@ -43,9 +41,7 @@ def decrypt_aes(encrypted_data: str, key: str) -> str:
     iv = base64.b64decode(iv_str)
     encrypted_bytes = base64.b64decode(encrypted_data_str)
 
-    cipher = Cipher(
-        algorithms.AES(key_str), modes.CBC(iv), backend=default_backend()
-    )
+    cipher = Cipher(algorithms.AES(key_str), modes.CBC(iv), backend=default_backend())
     decryptor = cipher.decryptor()
     decrypted_bytes = decryptor.update(encrypted_bytes) + decryptor.finalize()
 

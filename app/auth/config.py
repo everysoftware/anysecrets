@@ -1,6 +1,6 @@
-from app.schemas import SettingsBase
+from app.base.schemas import BaseSettings
 
 
-class AuthSettings(SettingsBase):
+class AuthSettings(BaseSettings):
     auth_secret: str = "changethis"
     auth_token_lifetime: int = 3600

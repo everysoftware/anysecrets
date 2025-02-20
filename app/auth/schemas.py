@@ -1,18 +1,16 @@
 import datetime
 
 from fastapi_users import schemas
-from pydantic import EmailStr
-from pydantic import Field
+from pydantic import EmailStr, Field
 
-from app.schemas import BackendBase
+from app.base.schemas import BaseModel
 
 
-class SUserRead(BackendBase, schemas.BaseUser[int]):
+class SUserRead(BaseModel, schemas.BaseUser[int]):
     id: int
     email: EmailStr
     hashed_password: str = Field(exclude=True)
-    first_name: str = Field(max_length=32, examples=["John"])
-    last_name: str = Field("", max_length=32, examples=["Doe"])
+    name: str
     is_active: bool = True
     is_superuser: bool = False
     is_verified: bool = False
@@ -20,18 +18,16 @@ class SUserRead(BackendBase, schemas.BaseUser[int]):
     updated_at: datetime.datetime
 
 
-class SUserCreate(BackendBase, schemas.BaseUserCreate):
-    first_name: str = Field(max_length=32, examples=["John"])
+class SUserCreate(BaseModel, schemas.BaseUserCreate):
+    name: str
     email: EmailStr
     password: str = Field(
         min_length=1,
         max_length=128,
-        examples=["Password123!"],
+        examples=["changeme"],
     )
-    last_name: str = Field("", max_length=32, examples=["Doe"])
 
 
-class SUserUpdate(BackendBase, schemas.BaseUserUpdate):
-    first_name: str | None = Field(None, max_length=32, examples=["John"])
-    last_name: str | None = None
+class SUserUpdate(BaseModel, schemas.BaseUserUpdate):
+    name: str | None = None
     password: str | None = None

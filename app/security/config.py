@@ -1,5 +1,5 @@
-from app.schemas import SettingsBase
+from app.base.schemas import BaseSettings
 
 
-class SecuritySettings(SettingsBase):
+class SecuritySettings(BaseSettings):
     encryption_secret: str = "changethis"

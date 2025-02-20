@@ -2,20 +2,21 @@ from typing import Annotated
 
 from fastapi import Depends
 
-from app.auth.dependencies import MeDep
+from app.auth.dependencies import UserDep
+from app.base.types import UUID
 from app.exceptions import NotEnoughRights
 from app.passwords.exceptions import PasswordNotFound
-from app.passwords.schemas import SPasswordRead
-from app.passwords.service import PasswordService
+from app.passwords.models import Password
+from app.passwords.service import PasswordUseCases
 
-PasswordServiceDep = Annotated[PasswordService, Depends()]
+PasswordServiceDep = Annotated[PasswordUseCases, Depends()]
 
 
 async def valid_password(
     service: PasswordServiceDep,
-    user: MeDep,
-    password_id: int,
-) -> SPasswordRead:
+    user: UserDep,
+    password_id: UUID,
+) -> Password:
     password = await service.get(password_id)
     if password is None:
         raise PasswordNotFound()

@@ -1,81 +1,68 @@
 from abc import ABC
-from typing import Any, Iterable, overload
+from collections.abc import Sequence
+from typing import Any, ClassVar, TypeVar, cast
 
-from sqlalchemy import select, Select
+from sqlalchemy import Select, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.db.base import BaseOrm
-from app.db.schemas import PageParams, Page
-from app.db.types import ID
-from app.schemas import BackendBase
+from app.base.models import Entity
+from app.base.repository import IRepository
+from app.base.specification import BasicPagination, Page, Specification
+from app.base.types import UUID
+from app.db.exceptions import NoResultFound
+
+T = TypeVar("T", bound=Entity)
 
 
-class BaseAlchemyRepository(ABC):
-    session: AsyncSession
+class SQLAlchemyRepository(IRepository[T], ABC):
+    model_type: ClassVar[type[Entity]]
 
-    def __init__(self, session: AsyncSession):
+    def __init__(
+        self,
+        session: AsyncSession,
+    ) -> None:
         self.session = session
 
+    async def add(self, model: T) -> T:
+        self.session.add(model)
+        return model
 
-class AlchemyRepository[M: BaseOrm, S: BackendBase](BaseAlchemyRepository):
-    model_type: type[M]
-    schema_type: type[S]
-
-    async def create(self, **data: Any) -> S:
-        instance = self.model_type(**data)
-        self.session.add(instance)
-        await self.session.flush()
-        return self.schema_type.model_validate(instance)
-
-    async def get(self, ident: ID) -> S | None:
-        instance = await self.session.get(self.model_type, ident)
-        if instance is None:
+    async def get(self, id: UUID) -> T | None:
+        model = await self.session.get(self.model_type, id)
+        if model is None:
             return None
-        return self.schema_type.model_validate(instance)
+        return cast(T, model)
 
-    async def update(self, ident: ID, **data: Any) -> S:
-        instance = await self.session.get_one(self.model_type, ident)  # type: BaseOrm
-        instance.update(**data)
-        await self.session.flush()
-        return self.schema_type.model_validate(instance)
+    async def get_one(self, id: UUID) -> T:
+        model = await self.get(id)
+        if model is None:
+            raise NoResultFound()
+        return model
 
-    async def delete(self, ident: ID) -> S:
-        instance = await self.session.get_one(self.model_type, ident)
-        await self.session.delete(instance)
-        await self.session.flush()
-        return self.schema_type.model_validate(instance)
+    async def find(self, *spec: Specification) -> T | None:
+        stmt = self._select(BasicPagination(limit=1), *spec)
+        result = await self.session.scalars(stmt)
+        return result.first()
 
-    @overload
-    def build_pagination_query[Q: Select[Any]](
-        self, params: PageParams, stmt: Q
-    ) -> Q: ...
+    async def find_one(self, *spec: Specification) -> T:
+        model = await self.find(*spec)
+        if model is None:
+            raise NoResultFound()
+        return model
 
-    @overload
-    def build_pagination_query(
-        self, params: PageParams, stmt: None = None
-    ) -> Select[Any]: ...
+    async def remove(self, model: T) -> T:
+        await self.session.delete(model)
+        return model
 
-    def build_pagination_query(
-        self, params: PageParams, stmt: Select[Any] | None = None
-    ) -> Select[Any]:
-        order_by = []
-        for item in params.sort_params:
-            attr = getattr(self.model_type, item.field)
-            order_by.append(attr.asc() if item.order == "asc" else attr.desc())
-        if stmt is None:
-            stmt = select(self.model_type)
-        stmt = (
-            stmt.limit(params.limit).offset(params.offset).order_by(*order_by)
-        )
-        return stmt
+    async def get_many(self, *spec: Specification) -> Page[T]:
+        result = await self.session.scalars(self._select(*spec))
+        return self._to_page(result.all())
 
-    def validate_page(self, instances: Iterable[Any]) -> Page[S]:  # noqa
-        items = [
-            self.schema_type.model_validate(instance) for instance in instances
-        ]
+    def _to_page(self, items: Sequence[Any]) -> Page[T]:  # noqa
         return Page(items=items)
 
-    async def get_many(self, params: PageParams) -> Page[S]:  # noqa
-        stmt = self.build_pagination_query(params)
-        result = await self.session.scalars(stmt)
-        return self.validate_page(result)
+    def _select(self, *spec: Specification) -> Select[tuple[T]]:
+        stmt = select(self.model_type)
+        for s in spec:
+            stmt = s.to_expression(stmt, self.model_type)
+        return stmt  # type: ignore[return-value]

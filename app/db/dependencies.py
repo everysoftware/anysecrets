@@ -1,14 +1,15 @@
-from typing import AsyncGenerator, Annotated
+from collections.abc import AsyncIterator
+from typing import Annotated
 
 from fastapi import Depends
 
-from app.db.connection import async_session_factory
-from app.db.uow import UOW
+from app.db.connection import session_factory
+from app.db.uow import IUnitOfWork, SQLAlchemyUOW
 
 
-async def get_uow() -> AsyncGenerator[UOW, None]:
-    async with UOW(async_session_factory) as uow:
+async def get_uow() -> AsyncIterator[IUnitOfWork]:
+    async with SQLAlchemyUOW(session_factory) as uow:
         yield uow
 
 
-UOWDep = Annotated[UOW, Depends(get_uow)]
+UOWDep = Annotated[SQLAlchemyUOW, Depends(get_uow)]

@@ -15,6 +15,7 @@ alembic = "^1.13.1"
 fastapi-users = { extras = ["sqlalchemy"], version = "^13.0.0" }
 pydantic-settings = "^2.3.0"
 asyncpg = "^0.29.0"
+uuid-utils = "^0.10.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -26,17 +27,28 @@ pre-commit = "^3.7.0"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-
 [tool.ruff]
-fix = true
+line-length = 120
 indent-width = 4
-line-length = 79
-src = ["src"]
-target-version = "py311"
+target-version = "py312"
+output-format = "concise"
 
-[tool.ruff.format]
-docstring-code-format = true
-
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501",  # line too long, handled by ruff
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+    "W191",  # indentation contains tabs
+]
 
 [tool.mypy]
 strict = true

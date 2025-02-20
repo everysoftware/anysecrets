@@ -37,7 +37,7 @@ RUN poetry export --without-hashes --without dev -f requirements.txt -o requirem
 #
 # Stage: dev
 #
-FROM base as dev
+FROM base AS dev
 ARG APP_DIR
 ARG APP_PATH
 
@@ -55,7 +55,7 @@ CMD ["uvicorn \"$APP_DIR:app\" --host 0.0.0.0 --port 8000 --reload"]
 #
 # Stage: prod
 #
-FROM python:$PYTHON_VERSION as prod
+FROM python:$PYTHON_VERSION AS prod
 ARG APP_DIR
 ARG APP_PATH
 
