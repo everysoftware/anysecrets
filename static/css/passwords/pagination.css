@@ -14,3 +14,11 @@ h2 {
     margin-top: 24px;
     justify-self: center;
 }
+
+.main-page {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px;
+}

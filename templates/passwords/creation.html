@@ -12,7 +12,7 @@
 
 {% block tabs %}
     <li class="current"><a href="/passwords">Passwords</a></li>
-    <li><a href="/me">Account</a></li>
+    <li><a href="/me">Profile</a></li>
 {% endblock %}
 {% block content %}
 
@@ -24,10 +24,8 @@
 
     <form id="createPasswordForm" class="form" action="">
         <div class="form-head">
-            <div class="image-cropper">
-                <img class="circle-pic" id="password-pic" src="/static/assets/key_1024x1024.png" alt="Password picture">
-            </div>
-            <h2>Create password</h2>
+            <span class="material-icons md-48" style="color: var(--blue-color-50);">key</span> <!-- Иконка ключа, синего цвета -->
+            <h2>Add Password</h2>
         </div>
         <div class="form-fields">
             <div class="form-field">
@@ -54,11 +52,8 @@
             </div>
         </div>
         <div class="form-actions">
-            <button class="btn" id="create" type="submit">Create</button>
-            <button class="btn icon-btn" id="generatePasswordButton"><span
-                    class="material-symbols-outlined md-20">vpn_key</span></button>
-            <button class="btn icon-btn" id="back" onclick="history.back()"><span
-                    class="material-icons md-20">arrow_back</span></button>
+            <button class="btn safe-btn" id="create" type="submit">Add&nbsp;<span
+                    class="material-icons md-20">add</span></button>
         </div>
     </form>
 {% endblock %}

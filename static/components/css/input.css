@@ -10,7 +10,7 @@ label {
     width: 100%;
 }
 
-.toggle-visibility, .copy {
+.toggle-visibility {
     cursor: pointer;
 }
 
@@ -21,4 +21,3 @@ label {
     max-width: 800px;
     gap: 8px;
 }
-+

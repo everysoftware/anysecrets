@@ -4,7 +4,7 @@
 
 {% block tabs %}
     <li><a href="/passwords">Passwords</a></li>
-    <li class="current"><a href="/me">Account</a></li>
+    <li class="current"><a href="/me">Profile</a></li>
 {% endblock %}
 
 {% block scripts %}
@@ -17,17 +17,10 @@
 
     <form id="viewForm" class="form">
         <div class="form-head">
-            <div class="image-cropper">
-                <img class="circle-pic" src="/static/assets/logo_1024x1024.png" alt="App Logo">
-            </div>
-            <h2>My account</h2>
+            <span class="material-icons md-48" style="color: var(--blue-color-50);">person</span> <!-- Иконка ключа, синего цвета -->
+            <h2>{{ user.name }}</h2>
         </div>
         <div class="form-fields">
-            <div class="form-field">
-                <input type="text" class="input-field" id="name"
-                       value="{{ user.name }}"
-                       placeholder="Name" readonly>
-            </div>
             <div class="form-field">
                 <input type="email" class="input-field" id="email"
                        value="{{ user.email }}"
@@ -35,8 +28,7 @@
             </div>
         </div>
         <div class="form-actions">
-            <button type="button" class="btn" id="back" onclick="history.back()">Back</button>
-            <button type="button" class="btn icon-btn" id="logout"><span
+            <button type="button" class="btn danger-btn" id="logout">Logout&nbsp;<span
                     class="material-icons md-20">logout</span></button>
         </div>
     </form>

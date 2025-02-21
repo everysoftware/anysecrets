@@ -36,13 +36,3 @@ Self-hosted password manager with AES Encryption.
    ```bash
       make up
    ```
-
-## Screenshots
-
-![Get Started](assets/get_started.png)
-![Registration](assets/registration.png)
-![Login](assets/login.png)
-![Main Page](assets/main_page.png)
-![Password](assets/password.png)
-![Profile](assets/profile.png)
-![img.png](assets/api_reference.png)

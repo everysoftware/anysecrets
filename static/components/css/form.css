@@ -4,28 +4,33 @@
 .form {
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
-    margin: 0 auto;
-    max-width: 400px;
+    justify-content: center;
+    border-radius: 16px; /* закругленные углы */
+    background: var(--base-color-80); /* светло-синий фон */
     gap: 8px;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box; /* Включаем отступы и границы в расчет ширины */
+    padding: 32px;
 }
 
 .form .form-head {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-bottom: 8px;
 }
 
 .form .form-fields {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin-bottom: 4px;
+    align-items: center;
 }
 
-.form .form-field, .form .form-actions {
+.form .form-actions {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -33,4 +38,30 @@
     box-sizing: border-box;
     gap: 8px;
     justify-content: space-between;
+}
+
+.form .form-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 8px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.form .image-cropper {
+    width: 96px;
+    height: 96px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form .circle-pic {
+    width: auto;
+    height: 100%;
 }

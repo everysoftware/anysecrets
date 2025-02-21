@@ -11,7 +11,7 @@
 
 {% block tabs %}
     <li class="current"><a href="/passwords">Passwords</a></li>
-    <li><a href="/me">Account</a></li>
+    <li><a href="/me">Profile</a></li>
 {% endblock %}
 {% block content %}
 
@@ -57,9 +57,8 @@
             </div>
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn" id="savePasswordButton">Save</button>
-            <button type="button" class="btn icon-btn" id="back" onclick="history.back()"><span
-                    class="material-icons md-20">arrow_back</span></button>
+            <button type="submit" class="btn safe-btn" id="savePasswordButton">Save &nbsp;<span
+                    class="material-icons md-20">done</span></button>
         </div>
     </form>
 {% endblock %}

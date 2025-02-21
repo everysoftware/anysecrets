@@ -1,48 +1,51 @@
 :root {
-    --base-color-90: #1a1c1f;
+    --base-color-90: #1a1d20;
     --base-color-85: #232529;
-    --base-color-80: #2b2e34;
-    --base-color-70: #3a3d42;
-    --base-color-60: #4a4e52;
-    --base-color-50: #64686c;
-    --base-color-40: #7c8084;
-    --base-color-30: #94989c;
-    --base-color-20: #ccc;
-    --base-color-10: #c8d1d9;
+    --base-color-80: #2a2e33;
+    --base-color-70: #3a3d46;
+    --base-color-60: #4b4f59;
+    --base-color-50: #5c616d;
+    --base-color-40: #7c8189;
+    --base-color-30: #9ca0a7;
+    --base-color-20: #bcc0c5;
+    --base-color-10: #dce0e3;
     --base-color-0: #ffffff;
 
-    --blue-color-90: #005580;
-    --blue-color-80: #006699;
-    --blue-color-70: #0077b3;
-    --blue-color-60: #0088cc;
-    --blue-color-50: #0099e6;
-    --blue-color-40: #00aaff;
+    /* Синий */
+    --blue-color-90: #003d66;
+    --blue-color-80: #005080;
+    --blue-color-70: #006699;
+    --blue-color-60: #007db3;
+    --blue-color-50: #0093cc;
+    --blue-color-40: #00aae6;
     --blue-color-30: #33bbff;
     --blue-color-20: #66ccff;
     --blue-color-10: #99ddff;
     --blue-color-0: #cceeff;
 
-    --green-color-90: #004d00;
-    --green-color-80: #006600;
-    --green-color-70: #007f00;
-    --green-color-60: #009900;
-    --green-color-50: #00b300;
-    --green-color-40: #00cc00;
-    --green-color-30: #00e600;
-    --green-color-20: #00ff00;
-    --green-color-10: #33ff33;
-    --green-color-0: #66ff66;
+    /* Зеленый */
+    --green-color-90: #003d00;
+    --green-color-80: #005200;
+    --green-color-70: #006600;
+    --green-color-60: #007a00;
+    --green-color-50: #009900;
+    --green-color-40: #00b300;
+    --green-color-30: #00cc00;
+    --green-color-20: #33e633;
+    --green-color-10: #66ff66;
+    --green-color-0: #99ff99;
 
-    --red-color-90: #660000;
-    --red-color-80: #800000;
-    --red-color-70: #990000;
-    --red-color-60: #b30000;
-    --red-color-50: #cc0000;
-    --red-color-40: #e60000;
-    --red-color-30: #ff0000;
-    --red-color-20: #ff3333;
-    --red-color-10: #ff6666;
-    --red-color-0: #ff9999;
+    /* Красный */
+    --red-color-90: #4d0015;
+    --red-color-80: #66001a;
+    --red-color-70: #80001f;
+    --red-color-60: #990024;
+    --red-color-50: #b30029;
+    --red-color-40: #cc0030;
+    --red-color-30: #e60036;
+    --red-color-20: #ff3342;
+    --red-color-10: #ff6671;
+    --red-color-0: #ff9985;
 
     --header-color: var(--base-color-0);
     --header-bg-color: var(--base-color-80);
@@ -61,7 +64,7 @@
     --input-color: var(--header-color);
     --input-border-color: var(--base-color-20);
 
-    --button-bg-color: var(--header-border-color);
+    --button-bg-color: var(--blue-color-50);
     --button-bg-color-hover: var(--blue-color-70);
     --button-color: var(--base-color-0);
     --danger-button-bg-color: var(--red-color-50);

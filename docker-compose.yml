@@ -42,6 +42,8 @@ services:
     restart: unless-stopped
     volumes:
       - "./frontend:/opt/app/frontend"
+      - "./static:/opt/app/static"
+      - "./templates:/opt/app/templates"
     networks:
       - secrets_net
 
