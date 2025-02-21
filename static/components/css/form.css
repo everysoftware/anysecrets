@@ -1,0 +1,36 @@
+@import url('button.css');
+@import url('input.css');
+
+.form {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 400px;
+    gap: 8px;
+}
+
+.form .form-head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.form .form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form .form-field, .form .form-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 8px;
+    justify-content: space-between;
+}

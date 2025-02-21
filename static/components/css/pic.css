@@ -1,0 +1,15 @@
+.image-cropper {
+    width: 48px;
+    height: 48px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle-pic {
+    width: auto;
+    height: 100%;
+}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Passwords{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="/static/css/passwords/pagination.css">
+{% endblock %}
+
+{% block scripts %}
+    <script type="module" src="/static/js/passwords/pagination.js"></script>
+{% endblock %}
+
+{% block tabs %}
+    <li class="current"><a href="/passwords">Passwords</a></li>
+    <li><a href="/me">Account</a></li>
+{% endblock %}
+
+{% block content %}
+    <h1>Manage and share passwords</h1>
+    <p><b>Secure your passwords</b> with an AES encryption and access them from <b>anywhere</b> in the world.</p>
+    <label for="search"></label>
+    <div class="search-container">
+        {% if query %}
+            <input class="input-field" type="text" id="search" value="{{ query }}" placeholder="Search passwords...">
+        {% else %}
+            <input class="input-field" type="text" id="search" placeholder="Search passwords..." autofocus>
+        {% endif %}
+        <button id="searchButton" class="btn icon-btn" onclick="searchPasswords()"><i
+                class="material-icons">search</i></button>
+        <button id="addButton" class="btn icon-btn" onclick="window.location.assign('/passwords/add')"><i
+                class="material-icons">add</i></button>
+    </div>
+    <table class="table">
+        {% if passwords %}
+            <caption><h2>Recently Updated</h2></caption>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>URL</th>
+                <th></th>
+            </tr>
+            </thead>
+        {% else %}
+            {% if query %}
+                <h2 id="no_results">No results found 😔</h2>
+            {% else %}
+                <h2 id="no_results">Create your first password! Click on the + button ✨</h2>
+            {% endif %}
+        {% endif %}
+        <tbody>
+        {% for password in passwords %}
+            <tr onclick="window.location.assign('/passwords/{{ password.id }}')">
+                <td><b><a>{{ password.name }}</a></b></td>
+                <td><b>{{ password.username }}</b></td>
+                <td><a target="_blank" rel="noopener noreferrer" href="{{ password.url }}">{{ password.url }}</a></td>
+                <td class="arrow"><i class="material-icons">arrow_forward</i></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

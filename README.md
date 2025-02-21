@@ -1,41 +1,48 @@
-# Secrets Backend
+# AnySecrets
 
-![GitHub](https://img.shields.io/github/license/everysoftware/secrets)
+![GitHub](https://img.shields.io/github/license/everysoftware/secrets-frontend)
 
-Simple self-hosted password manager.
+Self-hosted password manager with AES Encryption.
 
----
-
-**Backend:** https://github.com/everysoftware/secrets-backend
-
-**Frontend:** https://github.com/everysoftware/secrets-frontend
-
----
+![Main Page](assets/main_page.png)
 
 ## Features
 
-* **Secure authentication**. JWT-based authentication with access tokens.
-* **Password encryption**. Passwords are encrypted with AES-256.
+* Create and manage your passwords from anywhere in the world
+* Search passwords easily by name or URL
+* Protect your passwords with AES encryption
 
 ## Stack
 
-Python 3.12 • FastAPI • SQLAlchemy • cryptography
+**Backend**: Python 3.12, FastAPI, SQLAlchemy, PostgreSQL, cryptography
+
+**Frontend**: Python 3.12, FastAPI, Jinja2, HTML, CSS, JS
 
 ## Installation
 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/everysoftware/secrets-backend
+    git clone https://github.com/everysoftware/anysecrets
     ```
-2. Create `.env` based on `.env.example`.
-
-3. Start the application:
+2. Create `.env` file based on `.env.example`:
 
     ```bash
-       make up
+    cp .env.example .env
     ```
 
-## API Reference
+3. Run the application:
 
+   ```bash
+      make up
+   ```
+
+## Screenshots
+
+![Get Started](assets/get_started.png)
+![Registration](assets/registration.png)
+![Login](assets/login.png)
+![Main Page](assets/main_page.png)
+![Password](assets/password.png)
+![Profile](assets/profile.png)
 ![img.png](assets/api_reference.png)

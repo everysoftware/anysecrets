@@ -1,0 +1,12 @@
+h2 {
+    margin-bottom: 16px;
+}
+
+#onboardingForm .form-head {
+    flex-direction: column;
+}
+
+#welcome-caption {
+    flex-direction: column;
+    gap: 4px;
+}

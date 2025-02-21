@@ -1,6 +1,3 @@
-APP_NAME = app
-TESTS_PATH = tests
-
 .PHONY: up
 up:
 	docker-compose up --build -d
@@ -23,12 +20,12 @@ restart:
 
 .PHONY: format
 format:
-	ruff format $(APP_NAME) $(TESTS_PATH)
+	ruff format .
 
 .PHONY: lint
 lint:
-	ruff check $(APP_NAME) $(TESTS_PATH) --fix
-	mypy $(APP_NAME) --install-types --enable-incomplete-feature=NewGenericSyntax
+	ruff check . --fix
+	mypy . --install-types --enable-incomplete-feature=NewGenericSyntax
 
 PHONY: generate
 generate:

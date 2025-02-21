@@ -1,0 +1,57 @@
+@import url("colors.css");
+
+.table {
+    background-color: var(--table-bg-color);
+    color: var(--table-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+}
+
+.table th {
+    color: var(--table-header-color);
+    background-color: var(--table-header-bg-color);
+    font-size: 14px;
+}
+
+/* Костыль для закругления хедера */
+.table th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.table th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.table tr:hover {
+    background-color: var(--table-row-hover-bg-color);
+    cursor: pointer;
+}
+
+.table a {
+    color: var(--table-link-color);
+    text-decoration: none;
+}
+
+.table a:hover {
+    text-decoration: underline;
+}
+
+.table .arrow {
+    width: 20px;
+    color: var(--label-secondary-color);
+}

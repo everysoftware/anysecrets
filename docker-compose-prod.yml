@@ -1,4 +1,8 @@
 services:
-  fastapi:
+  backend:
+    build:
+      target: prod
+
+  frontend:
     build:
       target: prod

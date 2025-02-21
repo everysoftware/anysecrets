@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/auth/onboarding.css">
+    <title>AnySecrets</title>
+{% endblock %}
+
+{% block tabs %}
+    <li class="current"><a href="/">Onboarding</a></li>
+    <li><a href="/login">Login</a></li>
+{% endblock %}
+
+{% block content %}
+    <form id="onboardingForm" class="form" action="">
+        <div class="form-head">
+            <img src="/static/assets/logo_1024x1024.png" width="100" height="100" alt="App Logo">
+            <div id="welcome-caption">
+                <h2>Welcome to AnySecrets</h2>
+                <p>Manage and share your passwords securely.</p>
+            </div>
+        </div>
+        <div class="form-actions">
+            <a href="/register" class="btn">Get Started</a>
+        </div>
+    </form>
+{% endblock %}

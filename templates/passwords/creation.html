@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Add password{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="/static/css/passwords/view.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+{% endblock %}
+
+{% block scripts %}
+    <script type="module" src="/static/js/passwords/creation.js"></script>
+{% endblock %}
+
+{% block tabs %}
+    <li class="current"><a href="/passwords">Passwords</a></li>
+    <li><a href="/me">Account</a></li>
+{% endblock %}
+{% block content %}
+
+    <label for="title"></label>
+    <label for="username"></label>
+    <label for="password"></label>
+    <label for="url"></label>
+    <label for="note"></label>
+
+    <form id="createPasswordForm" class="form" action="">
+        <div class="form-head">
+            <div class="image-cropper">
+                <img class="circle-pic" id="password-pic" src="/static/assets/key_1024x1024.png" alt="Password picture">
+            </div>
+            <h2>Create password</h2>
+        </div>
+        <div class="form-fields">
+            <div class="form-field">
+                <input type="text" class="input-field" id="title"
+                       placeholder="Title" required>
+            </div>
+            <div class="form-field">
+                <input type="text" class="input-field" id="username"
+                       placeholder="Username" required>
+            </div>
+            <div class="form-field">
+                <input type="password" class="input-field password" id="password"
+                       placeholder="Password" required>
+                <span class="copy material-icons md-20">content_copy</span>
+                <span class="toggle-visibility material-icons md-20">visibility</span>
+            </div>
+            <div class="form-field">
+                <input type="text" class="input-field" id="url"
+                       placeholder="URL">
+            </div>
+            <div class="form-field">
+                <input type="text" class="input-field" id="note"
+                       placeholder="Note">
+            </div>
+        </div>
+        <div class="form-actions">
+            <button class="btn" id="create" type="submit">Create</button>
+            <button class="btn icon-btn" id="generatePasswordButton"><span
+                    class="material-symbols-outlined md-20">vpn_key</span></button>
+            <button class="btn icon-btn" id="back" onclick="history.back()"><span
+                    class="material-icons md-20">arrow_back</span></button>
+        </div>
+    </form>
+{% endblock %}

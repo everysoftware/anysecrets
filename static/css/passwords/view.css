@@ -1,0 +1,16 @@
+.password-title-date {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px;
+}
+
+.password-title-date h2 {
+    margin: 0;
+}
+
+#updated_at {
+    text-align: center;
+    margin: 0;
+    font-size: 14px;
+}

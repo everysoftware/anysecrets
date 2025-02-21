@@ -1,0 +1,26 @@
+@import url("colors.css");
+@import url("tabs.css");
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: var(--header-bg-color);
+    box-sizing: border-box;
+    width: 100%;
+    height: 52px;
+}
+
+.logo-container a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 24px;
+}
+
+.logo-container img {
+    width: 32px;
+    border: 2px solid var(--header-border-color);
+    border-radius: 50%;
+}

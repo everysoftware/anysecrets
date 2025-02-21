@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Login to account{% endblock %}
+
+{% block scripts %}
+    <script type="module" src="/static/js/auth/login.js"></script>
+{% endblock %}
+
+{% block tabs %}
+    <li><a href="/">Onboarding</a></li>
+    <li class="current"><a href="/login">Login
+    </a></li>
+{% endblock %}
+
+{% block content %}
+    <form id="loginForm" class="form">
+        <div class="form-head">
+            <div class="image-cropper">
+                <img class="circle-pic" src="/static/assets/logo_1024x1024.png" alt="App Logo">
+            </div>
+            <h2>Login to account</h2>
+        </div>
+        <div class="form-fields">
+            <label>
+                <input type="text" id="email" placeholder="Email" class="input-field" autocomplete="username" autofocus
+                       required>
+            </label>
+            <label>
+                <input type="password" id="password" placeholder="Password" class="input-field"
+                       autocomplete="current-password" required>
+            </label>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn">Login</button>
+        </div>
+        <div class="form-footer">
+            <p>Don't have an account? <a href="/register">Register</a></p>
+        </div>
+    </form>
+{% endblock %}

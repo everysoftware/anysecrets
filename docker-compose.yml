@@ -11,22 +11,40 @@ services:
     networks:
         - secrets_net
 
-  fastapi:
+  backend:
+    depends_on:
+      - db
     build:
       context: .
-      dockerfile: docker/fastapi.Dockerfile
-      target: dev
+      dockerfile: docker/backend.Dockerfile
+      target: local
     env_file:
       - .env
     restart: unless-stopped
     ports:
       - "8014:8000"
-    depends_on:
-      - db
     volumes:
-      - "./app:/opt/app/app"
+      - "./backend:/opt/app/backend"
     networks:
       - secrets_net
+
+  frontend:
+    depends_on:
+      - backend
+    build:
+      context: .
+      dockerfile: docker/frontend.Dockerfile
+      target: local
+    env_file:
+      - .env
+    ports:
+      - "3014:3000"
+    restart: unless-stopped
+    volumes:
+      - "./frontend:/opt/app/frontend"
+    networks:
+      - secrets_net
+
 volumes:
   pg_data:
 networks:

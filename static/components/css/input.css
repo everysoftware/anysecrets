@@ -1,0 +1,24 @@
+.input-field {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid var(--input-border-color);
+    box-sizing: border-box;
+}
+
+label {
+    width: 100%;
+}
+
+.toggle-visibility, .copy {
+    cursor: pointer;
+}
+
+.search-container {
+    display: flex;
+    margin: auto;
+    width: 100%;
+    max-width: 800px;
+    gap: 8px;
+}
++
