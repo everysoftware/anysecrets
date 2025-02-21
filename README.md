@@ -1,16 +1,17 @@
 # AnySecrets
 
-![GitHub](https://img.shields.io/github/license/everysoftware/secrets-frontend)
+**Simple password management solution**
 
-Self-hosted password manager with AES Encryption.
+---
 
-![Main Page](assets/main_page.png)
+![GitHub](https://img.shields.io/github/license/everysoftware/anysecrets)
+
+---
 
 ## Features
 
-* Create and manage your passwords from anywhere in the world
+* Create and manage passwords safely with an AES-256 encryption 
 * Search passwords easily by name or URL
-* Protect your passwords with AES encryption
 
 ## Stack
 
