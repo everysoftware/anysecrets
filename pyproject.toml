@@ -4,6 +4,10 @@ version = "0.1.0"
 description = ""
 authors = ["Ivan Stasevich <pravitel2015ify@gmail.com>"]
 readme = "README.md"
+packages = [
+    { include = "backend" },
+    { include = "frontend" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -37,21 +41,21 @@ output-format = "concise"
 
 [tool.ruff.lint]
 select = [
-    "E",  # pycodestyle errors
-    "W",  # pycodestyle warnings
-    "F",  # pyflakes
-    "I",  # isort
-    "B",  # flake8-bugbear
-    "C4",  # flake8-comprehensions
-    "UP",  # pyupgrade
-    "A",  # shadowed builtins
+    "E", # pycodestyle errors
+    "W", # pycodestyle warnings
+    "F", # pyflakes
+    "I", # isort
+    "B", # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+    "A", # shadowed builtins
     "RUF"  # ruff
 ]
 ignore = [
-    "E501",  # line too long, handled by ruff
-    "B008",  # do not perform function calls in argument defaults
-    "C901",  # too complex
-    "W191",  # indentation contains tabs
+    "E501", # line too long, handled by ruff
+    "B008", # do not perform function calls in argument defaults
+    "C901", # too complex
+    "W191", # indentation contains tabs
 ]
 
 [tool.ruff.format]
