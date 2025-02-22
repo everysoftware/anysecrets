@@ -13,8 +13,8 @@ class PasswordFilter(Filter):
 class SearchPasswordSpec(Specification):
     user_id: int
 
-    def to_expression[T](self, stmt: Select[T], model_type: type[Entity]) -> Select[T]:
-        return stmt.where(model_type.user_id == self.user_id)
+    def to_expression[T](self, stmt: Select[T], model_type: type[Entity]) -> Select[T]:  # type: ignore[type-var]
+        return stmt.where(model_type.user_id == self.user_id)  # type: ignore[attr-defined]
 
 
 class PasswordRepository(SQLAlchemyRepository[Password]):
